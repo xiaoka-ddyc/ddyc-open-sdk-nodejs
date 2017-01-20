@@ -21,13 +21,10 @@ class Sign{
     }
     getParams(href){
         const paramsObj = this.serialize(href.split('?')[1] || '') || {};
+        paramsObj.sign && delete paramsObj.sign;
         paramsObj.app_key = this.appkey;
         paramsObj.timestamp = new Date().getTime();
         return paramsObj;
-    }
-    param(obj){
-       return Object.keys(obj).sort()
-           .map((key)=>[key, obj[key]].join('=')).join('&');
     }
     urlParam(params){
         return Object.keys(params).sort()
@@ -59,9 +56,10 @@ class Sign{
     post(url, data){
         const path = url.split('?')[0];
         const params = this.getParams(url);
-        const requestBody = typeof data === 'object' ?JSON.stringify(data): '';
+        const requestBody = typeof data === 'object' ?
+            JSON.stringify(data): data || '';
         params.sign = this.createSign(params, requestBody);
-        const paramStr = this.param(params);
+        const paramStr = this.urlParam(params);
         return [path, paramStr].join('?');
     }
     get(url, data){
@@ -69,7 +67,8 @@ class Sign{
         const params = this.extend(this.getParams(url), data);
         const requestBody = '';
         params.sign = this.createSign(params, requestBody);
-        const paramStr = this.param(params);
+
+        const paramStr = this.urlParam(params);
         return [path, paramStr].join('?');
     }
 
@@ -83,4 +82,6 @@ const test = sign.get('http://intb-open.ddyc.com:8090/sign/test', {
 const post = sign.post('http://intb-open.ddyc.com:8090/sign/test', {
     data:''
 });
-console.log(post)
+console.log(post , JSON.stringify({
+    data:''
+}))

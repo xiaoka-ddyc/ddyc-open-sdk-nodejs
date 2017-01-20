@@ -48,7 +48,9 @@ class Sign{
     extend(obj1,obj2){
         if(obj2){
             Object.keys(obj2).forEach(k=>{
-                obj1[k] = obj2[k];
+                if(obj2[k] !== ''){
+                    obj1[k] = obj2[k];
+                }
             });
         }
         return obj1;
@@ -60,7 +62,13 @@ class Sign{
             JSON.stringify(data): data || '';
         params.sign = this.createSign(params, requestBody);
         const paramStr = this.urlParam(params);
-        return [path, paramStr].join('?');
+        return {
+            path: path,
+            params,
+            sign: params.sign,
+            url: [path, paramStr].join('?'),
+            body: requestBody
+        };
     }
     get(url, data){
         const path = url.split('?')[0];
@@ -69,19 +77,14 @@ class Sign{
         params.sign = this.createSign(params, requestBody);
 
         const paramStr = this.urlParam(params);
-        return [path, paramStr].join('?');
+        return {
+            path: path,
+            params,
+            sign: params.sign,
+            url: [path, paramStr].join('?')
+        };
     }
 
 }
 
-const sign = new Sign('TEST', 'TEST');
-
-const test = sign.get('http://intb-open.ddyc.com:8090/sign/test', {
-    data:121
-});
-const post = sign.post('http://intb-open.ddyc.com:8090/sign/test', {
-    data:''
-});
-console.log(post , JSON.stringify({
-    data:''
-}))
+module.exports = Sign;

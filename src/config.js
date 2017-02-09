@@ -8,5 +8,5 @@
 module.exports = {
     appkey: 'TEST',
     appsecret: 'TEST',
-    host: 'https://open.ddyc.com/open'
+    host: 'http://intb-open.ddyc.com:8090/'
 }

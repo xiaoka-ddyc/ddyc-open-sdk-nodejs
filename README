@@ -1,0 +1,7 @@
+# 典典养车开放平台 nodejs版SDK
+
+## 安装使用
+````bash
+npm install
+npm test
+````

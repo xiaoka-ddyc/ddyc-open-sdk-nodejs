@@ -64,7 +64,7 @@ class Sign{
         const paramStr = this.urlParam(params);
         return {
             path: path,
-            params,
+            params:paramStr,
             sign: params.sign,
             url: [path, paramStr].join('?'),
             body: requestBody
@@ -79,7 +79,7 @@ class Sign{
         const paramStr = this.urlParam(params);
         return {
             path: path,
-            params,
+            params: paramStr,
             sign: params.sign,
             url: [path, paramStr].join('?')
         };

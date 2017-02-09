@@ -28,8 +28,9 @@ function httpOpen(options = {}) {
                 }catch (e){
                     reject(e);
                 }
+                return
             }
-            reject(new Error(body));
+            reject(new Error('Http状态失败'));
         })
     })
 }

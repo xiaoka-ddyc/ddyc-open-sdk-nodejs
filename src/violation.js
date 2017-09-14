@@ -14,7 +14,7 @@ const violation = {
      * @return {Promise}
      */
     condition(){
-        return http.openGet('violation/condition');
+        return http.openGet('violation/condition/all/1.0');
     },
     /**
      * 违章查询条件【带省份】
@@ -23,7 +23,7 @@ const violation = {
      * @return {Promise}
      */
     conditionAll(){
-        return http.openGet('violation/condition/all');
+        return http.openGet('violation/condition/all/1.0');
     },
     /**
      * 违章查询
@@ -39,7 +39,7 @@ const violation = {
      * @return {Promise}
      */
     query(options){
-        return http.openPost('violation/query', options);
+        return http.openPost('violation/query/1.0', options);
     },
     assignToken(options){
         return http.openPost('violation/assign/token', options);

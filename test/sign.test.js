@@ -11,7 +11,7 @@ const sign = new Sign('TEST', 'TEST');
 
 describe('Test method GET', function () {
     it('Test params is null', function (done) {
-        const test = sign.get('http://intb-open.ddyc.com:8090/sign/test');
+        const test = sign.get('https://int-open.ddyc.com:8443/sign/test');
         request.get(test.url, function (error, response, body) {
             const data = JSON.parse(body);
 
@@ -20,7 +20,7 @@ describe('Test method GET', function () {
         });
     });
     it('Test params is not null', function (done) {
-        const test = sign.get('http://intb-open.ddyc.com:8090/sign/test?app=2&s=3');
+        const test = sign.get('https://int-open.ddyc.com:8443/sign/test?app=2&s=3');
         request.get(test.url, function (error, response, body) {
             const data = JSON.parse(body);
             expect(data.data.urlParam).to.equal(test.params);
@@ -28,7 +28,7 @@ describe('Test method GET', function () {
         });
     });
     it('Test data is not null', function (done) {
-        const test = sign.get('http://intb-open.ddyc.com:8090/sign/test', {
+        const test = sign.get('https://int-open.ddyc.com:8443/sign/test', {
             s:2,
             d:3
         });
@@ -39,7 +39,7 @@ describe('Test method GET', function () {
         });
     });
     it('Test data and params is both exist', function (done) {
-        const test = sign.get('http://intb-open.ddyc.com:8090/sign/test?app=2&s=3', {
+        const test = sign.get('https://int-open.ddyc.com:8443/sign/test?app=2&s=3', {
             data:'2',
             datd: 3,
             d:''
@@ -53,7 +53,7 @@ describe('Test method GET', function () {
 });
 describe('Test method Post', function () {
     it('query params is null', function (done) {
-        const test = sign.post('http://intb-open.ddyc.com:8090/sign/test');
+        const test = sign.post('https://int-open.ddyc.com:8443/sign/test');
         request.post(test.url,{
             body: test.body
         }, function (error, response, body) {
@@ -64,7 +64,7 @@ describe('Test method Post', function () {
         });
     });
     it('the post body is not null', function (done) {
-        const test = sign.post('http://intb-open.ddyc.com:8090/sign/test',{
+        const test = sign.post('https://int-open.ddyc.com:8443/sign/test',{
             data:'body'
         });
         request.post(test.url,{
@@ -79,7 +79,7 @@ describe('Test method Post', function () {
         });
     });
     it('the post body is  null', function (done) {
-        const test = sign.post('http://intb-open.ddyc.com:8090/sign/test');
+        const test = sign.post('https://int-open.ddyc.com:8443/sign/test');
         request.post(test.url,{
             headers:{
               'Content-Type':'application/json',
@@ -93,7 +93,7 @@ describe('Test method Post', function () {
         });
     });
     it('The body and params is both exist', function (done) {
-        const test = sign.post('http://intb-open.ddyc.com:8090/sign/test?param=thisisaparam');
+        const test = sign.post('https://int-open.ddyc.com:8443/sign/test?param=thisisaparam');
         request.post(test.url,{
             headers:{
                 'Content-Type':'application/json',
